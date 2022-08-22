@@ -4,6 +4,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const morgan = require("morgan");
+const path = require("path");
 const app = express();
 const port = 8080;
 
@@ -23,6 +24,10 @@ db.on("error", () => {
   console.log("Connection error");
 });
 
+app.get("*", (res, req) => {
+  res.sendFile(path.join(BUILLD_PATH, "index.html"));
+});
 app.listen(port, () => {
   console.log(`server app listening on port ${port}`);
 });
+module.exports = app;
